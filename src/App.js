@@ -5,18 +5,18 @@ import Sidebar from './componants/articles/sidebar';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Tablep from './componants/people/tablep';
 import Sidebarr from './componants/people/sidebarr';
-
+import Appn from './componants/dashboard/Appn';
 
 function App() {
   return (
     <div className="App">
         <header className="App-header">
-
-          <Table/>
+          {/* <Table/>
           <Sidebar />
           <Tablep/>
-          <Sidebarr/>
-        </header>
+          <Sidebarr/> */}
+          <Appn/>
+         </header>
       </div>
   );
 }
