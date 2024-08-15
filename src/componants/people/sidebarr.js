@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './sidebar.css';
-import Table from './table'; 
+import './sidebarr.css';
+import Tablep from './tablep'; 
 
-const Sidebar = () => {
+const Sidebarr = () => {
   return (
     <div className="container">
       <aside className="sidebar">
@@ -27,12 +27,12 @@ const Sidebar = () => {
           <input type="text" placeholder="search"  />
         </div>
         <section className="content">
-          <h1>Articles</h1>
-           <Table/>
+          <h1>people</h1>
+           <Tablep/>
         </section>
       </main>
     </div>
   );
 };
 
-export default Sidebar;
+export default Sidebarr;

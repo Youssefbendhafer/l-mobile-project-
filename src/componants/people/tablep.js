@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css'; 
 import './tablep.css';
-import Sidebar from '../articles/sidebar';
-
 
 const Tablep = () => {
   const [items, setItems] = useState([
@@ -57,7 +55,6 @@ const Tablep = () => {
 
   return (
     <div>
-      <Sidebar />
       <table className="table">
         <thead>
           <tr>

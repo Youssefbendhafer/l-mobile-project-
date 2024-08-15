@@ -6,9 +6,10 @@ import SubmitForm from './componants/articles/submit';
 import Table from './componants/articles/table';
 import './index.css';
 import Sidebar from './componants/articles/sidebar';
+import Sidebarr from './componants/people/sidebarr';
 import Tablep from './componants/people/tablep';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import Submitc from './componants/people/submitc';
+import ClientForm from './componants/people/submitc';
 
 
 ReactDOM.render(
@@ -16,10 +17,11 @@ ReactDOM.render(
     <Router>
       <Routes>
       <Route path="/" element={<Sidebar />} />
+      <Route path="/pe" element={<Sidebarr />} />
         <Route path="/" element={<Table />} />
         <Route path="/submit" element={<SubmitForm />} />
-        <Route path="/submitc" element={<Submitc />} />
-        <Route path="/pe" element={<Tablep/>} />
+        <Route path="/submitc" element={<ClientForm />} />
+        <Route path="/pe" element={<Tablep />} />
       </Routes>
     </Router>
   </React.StrictMode>,

@@ -13,7 +13,7 @@ const ClientForm = () => {
     const clientData = { name, address, phone };
     console.log(clientData);
 
-    navigate('/');
+    navigate('/submitc');
   };
 
   return (
