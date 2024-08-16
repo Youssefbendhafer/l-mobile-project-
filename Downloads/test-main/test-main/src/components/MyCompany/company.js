@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import './table.css';
+import './style.css';
 import Header from '../MyHeader/Header';
 
 const Company = () => {
