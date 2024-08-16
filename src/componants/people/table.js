@@ -6,16 +6,16 @@ import './table.css';
 const Table = () => {
   const itemsPerPage = 6;
   const [items, setItems] = useState([
-    { id: 1, name: 'Item 1', price: 45, stock: 'available' },
-    { id: 2, name: 'Item 2', price: 45, stock: 'available' },
-    { id: 3, name: 'Item 3', price: 45, stock: 'available' },
-    { id: 4, name: 'Item 4', price: 25, stock: 'available' },
-    { id: 5, name: 'Item 5', price: 15, stock: 'out of stock' },
-    { id: 6, name: 'Item 6', price: 35, stock: 'available' },
-    { id: 7, name: 'Item 7', price: 50, stock: 'available' },
-    { id: 8, name: 'Item 8', price: 30, stock: 'out of stock' },
-    { id: 9, name: 'Item 9', price: 60, stock: 'available' },
-    { id: 10, name: 'Item 10', price: 20, stock: 'available' },
+    { id: 1, name: 'Item 1', CompanyName: 45},
+    { id: 2, name: 'Item 1', CompanyName: 45},
+    { id: 3, name: 'Item 1', CompanyName: 45},
+    { id: 4, name: 'Item 1', CompanyName: 45},
+    { id: 5, name: 'Item 1', CompanyName: 45},
+    { id: 6, name: 'Item 1', CompanyName: 45},
+    { id: 7, name: 'Item 1', CompanyName: 45},
+    { id: 1, name: 'Item 1', CompanyName: 45},
+    { id: 1, name: 'Item 1', CompanyName: 45}
+
   ]);
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -89,9 +89,7 @@ const Table = () => {
           <tr>
             <th style={{ textAlign: 'center' }}>ID</th>
             <th style={{ textAlign: 'center' }}>Name</th>
-            <th style={{ textAlign: 'center' }}>Price</th>
             <th style={{ textAlign: 'center' }}>Operate</th>
-            <th style={{ textAlign: 'center' }}>State</th>
           </tr>
         </thead>
         <tbody>
@@ -109,17 +107,7 @@ const Table = () => {
                   item.name
                 )}
               </td>
-              <td style={{ textAlign: 'center' }}>
-                {editingItem && editingItem.id === item.id ? (
-                  <input
-                    type="number"
-                    value={newPrice}
-                    onChange={(e) => setNewPrice(e.target.value)}
-                  />
-                ) : (
-                  item.price
-                )}
-              </td>
+             
               <td style={{ textAlign: 'center' }}>
                 {editingItem && editingItem.id === item.id ? (
                   <>
@@ -141,14 +129,7 @@ const Table = () => {
                   </>
                 )}
               </td>
-              <td style={{ textAlign: 'center' }}>
-                <button
-                  className={item.stock === 'available' ? 'button-stock-available' : 'button-stock-out'}
-                  onClick={() => toggleStock(item.id)}
-                >
-                  {item.stock}
-                </button>
-              </td>
+             
             </tr>
           ))}
         </tbody>
