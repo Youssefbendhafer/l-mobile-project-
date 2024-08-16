@@ -8,7 +8,7 @@ import Sidebar from './componants/articles/sidebar';
 import Sidebarr from './componants/people/sidebarr';
 import Tablep from './componants/people/tablep';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import ClientForm from './componants/people/submitc';
+import CompanyForm from './componants/people/submitcomp';
 import Dashboard from './componants/dashboard/dashboard';
 import Header from './componants/dashboard/Header';
 
@@ -20,7 +20,7 @@ ReactDOM.render(
       <Route path="/pe" element={<Sidebarr />} />
         <Route path="/" element={<Table />} />
         <Route path="/submit" element={<SubmitForm />} />
-        <Route path="/submitc" element={<ClientForm />} />
+        <Route path="/submitc" element={<CompanyForm />} />
         <Route path="/pe" element={<Tablep />} />
         <Route path="/da" element={<Dashboard />} />
         <Route path="/da" element={<Header />} />
