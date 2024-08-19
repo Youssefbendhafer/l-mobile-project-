@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./table.css";
 import Header from "../MyHeader/Header"; // Assuming you have a Header component
-
 
 const People = () => {
   const [items, setItems] = useState([
@@ -37,21 +36,43 @@ const People = () => {
   ]);
 
   const [editingItem, setEditingItem] = useState(null);
+  const [newId, setNewId] = useState("");
   const [newName, setNewName] = useState("");
   const [newPrice, setNewPrice] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const [newTotalAchat, setNewTotalAchat] = useState("");
-  const [newId, setNewId] = useState("");
+  const [showAddForm, setShowAddForm] = useState(false);
 
-  const handleAddItem = () => {
-    const newItem = {
-      id: items.length + 1,
-      name: `Item ${items.length + 1}`,
-      price: 0,
-      email: `item${items.length + 1}@example.com`,
-      totalAchat: 0,
+  const handleAddPerson = () => {
+    setShowAddForm(true);
+  };
+
+  const handleSaveNewPerson = () => {
+    const newPerson = {
+      id: newId,
+      name: newName,
+      price: newPrice,
+      email: newEmail,
+      totalAchat: newTotalAchat,
     };
-    setItems([...items, newItem]);
+    setItems([...items, newPerson]);
+    setShowAddForm(false);
+    // Clear form fields after saving
+    setNewId("");
+    setNewName("");
+    setNewPrice("");
+    setNewEmail("");
+    setNewTotalAchat("");
+  };
+
+  const handleCancelNewPerson = () => {
+    setShowAddForm(false);
+    // Clear form fields on cancel
+    setNewId("");
+    setNewName("");
+    setNewPrice("");
+    setNewEmail("");
+    setNewTotalAchat("");
   };
 
   const handleDelete = (id) => {
@@ -87,6 +108,29 @@ const People = () => {
 
   const handleCancel = () => {
     setEditingItem(null);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    switch (name) {
+      case "id":
+        setNewId(value);
+        break;
+      case "name":
+        setNewName(value);
+        break;
+      case "price":
+        setNewPrice(value);
+        break;
+      case "email":
+        setNewEmail(value);
+        break;
+      case "totalAchat":
+        setNewTotalAchat(value);
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -156,8 +200,9 @@ const People = () => {
                   <td>
                     <input
                       type="text"
+                      name="id"
                       value={newId}
-                      onChange={(e) => setNewId(e.target.value)}
+                      onChange={handleChange}
                     />
                   </td>
                 </tr>
@@ -166,8 +211,9 @@ const People = () => {
                   <td>
                     <input
                       type="text"
+                      name="name"
                       value={newName}
-                      onChange={(e) => setNewName(e.target.value)}
+                      onChange={handleChange}
                     />
                   </td>
                 </tr>
@@ -176,8 +222,9 @@ const People = () => {
                   <td>
                     <input
                       type="number"
+                      name="price"
                       value={newPrice}
-                      onChange={(e) => setNewPrice(e.target.value)}
+                      onChange={handleChange}
                     />
                   </td>
                 </tr>
@@ -186,8 +233,9 @@ const People = () => {
                   <td>
                     <input
                       type="email"
+                      name="email"
                       value={newEmail}
-                      onChange={(e) => setNewEmail(e.target.value)}
+                      onChange={handleChange}
                     />
                   </td>
                 </tr>
@@ -196,8 +244,9 @@ const People = () => {
                   <td>
                     <input
                       type="number"
+                      name="totalAchat"
                       value={newTotalAchat}
-                      onChange={(e) => setNewTotalAchat(e.target.value)}
+                      onChange={handleChange}
                     />
                   </td>
                 </tr>
@@ -212,11 +261,63 @@ const People = () => {
           </div>
         )}
 
-        <div className="add-item-form">
-          <button className="button-add" onClick={handleAddItem}>
-            <i className="fas fa-plus"></i> Add new client
+        <div className="add-person-form">
+          <button className="button-add" onClick={handleAddPerson}>
+            <i className="fas fa-plus"></i> Add Person
           </button>
         </div>
+
+        {showAddForm && (
+          <div className="add-person-modal">
+            <h2>Add New Person</h2>
+            <div className="form-group">
+              <label>ID:</label>
+              <input
+                type="text"
+                value={newId}
+                onChange={(e) => setNewId(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label>Name:</label>
+              <input
+                type="text"
+                value={newName}
+                onChange={(e) => setNewName(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label>Price:</label>
+              <input
+                type="number"
+                value={newPrice}
+                onChange={(e) => setNewPrice(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label>Email:</label>
+              <input
+                type="email"
+                value={newEmail}
+                onChange={(e) => setNewEmail(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label>Total Achat:</label>
+              <input
+                type="number"
+                value={newTotalAchat}
+                onChange={(e) => setNewTotalAchat(e.target.value)}
+              />
+            </div>
+            <button className="button-save" onClick={handleSaveNewPerson}>
+              <i className="fas fa-save"></i> Save
+            </button>
+            <button className="button-cancel" onClick={handleCancelNewPerson}>
+              <i className="fas fa-times"></i> Cancel
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

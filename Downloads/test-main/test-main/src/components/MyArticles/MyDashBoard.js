@@ -12,19 +12,11 @@ const Articles = () => {
   ]);
 
   const [editingItem, setEditingItem] = useState(null);
+  const [newId, setNewId] = useState("");
   const [newName, setNewName] = useState("");
   const [newPrice, setNewPrice] = useState("");
-  const [newId, setNewId] = useState("");
-
-  const handleAddItem = () => {
-    const newItem = {
-      id: items.length + 1,
-      name: "New Item",
-      price: 0,
-      stock: "available",
-    };
-    setItems([...items, newItem]);
-  };
+  const [newStock, setNewStock] = useState("available");
+  const [showAddForm, setShowAddForm] = useState(false);
 
   const handleDelete = (id) => {
     const filteredItems = items.filter((item) => item.id !== id);
@@ -33,15 +25,16 @@ const Articles = () => {
 
   const handleEdit = (item) => {
     setEditingItem(item);
+    setNewId(item.id);
     setNewName(item.name);
     setNewPrice(item.price);
-    setNewId(item.id);
+    setNewStock(item.stock);
   };
 
   const handleSave = () => {
     const updatedItems = items.map((item) =>
       item.id === editingItem.id
-        ? { ...item, id: newId, name: newName, price: newPrice }
+        ? { ...item, id: newId, name: newName, price: newPrice, stock: newStock }
         : item
     );
     setItems(updatedItems);
@@ -50,6 +43,35 @@ const Articles = () => {
 
   const handleCancel = () => {
     setEditingItem(null);
+  };
+
+  const handleAddArticle = () => {
+    setShowAddForm(true);
+  };
+
+  const handleSaveNewArticle = () => {
+    const newArticle = {
+      id: newId,
+      name: newName,
+      price: newPrice,
+      stock: newStock,
+    };
+    setItems([...items, newArticle]);
+    setShowAddForm(false);
+    // Clear form fields after saving
+    setNewId("");
+    setNewName("");
+    setNewPrice("");
+    setNewStock("available");
+  };
+
+  const handleCancelNewArticle = () => {
+    setShowAddForm(false);
+    // Clear form fields on cancel
+    setNewId("");
+    setNewName("");
+    setNewPrice("");
+    setNewStock("available");
   };
 
   const toggleStock = (id) => {
@@ -78,7 +100,7 @@ const Articles = () => {
               <th style={{ textAlign: "center" }}>Name</th>
               <th style={{ textAlign: "center" }}>Price</th>
               <th style={{ textAlign: "center" }}>Operate</th>
-              <th style={{ textAlign: "center" }}>State</th>
+              <th style={{ textAlign: "center" }}>Stock</th>
             </tr>
           </thead>
           <tbody>
@@ -151,7 +173,7 @@ const Articles = () => {
           </tbody>
           <tfoot>
             <tr>
-              <td id="cols" colSpan="6" className="pagination-footer">
+              <td colSpan="5" className="pagination-footer">
                 <div className="pagination-content">
                   <button className="pagination-button">
                     <i className="fas fa-chevron-left"></i> Previous
@@ -165,11 +187,59 @@ const Articles = () => {
           </tfoot>
         </table>
 
-        <div className="add-item-form">
-          <button className="button-add" onClick={handleAddItem}>
-            <i className="fas fa-plus"></i> Add Item
+        <div className="add-article-form">
+          <button className="button-add" onClick={handleAddArticle}>
+            <i className="fas fa-plus"></i> Add Article
           </button>
         </div>
+
+        {showAddForm && (
+          <div className="add-article-modal">
+            <h2>Add New Article</h2>
+            <div className="form-group">
+              <label>ID:</label>
+              <input
+                type="text"
+                value={newId}
+                onChange={(e) => setNewId(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label>Name:</label>
+              <input
+                type="text"
+                value={newName}
+                onChange={(e) => setNewName(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label>Price:</label>
+              <input
+                type="number"
+                value={newPrice}
+                onChange={(e) => setNewPrice(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label>Stock:</label>
+              <select
+                value={newStock}
+                onChange={(e) => setNewStock(e.target.value)}
+              >
+                <option value="available">Available</option>
+                <option value="out of stock">Out of Stock</option>
+              </select>
+            </div>
+            <div className="form-buttons">
+              <button className="button-save" onClick={handleSaveNewArticle}>
+                <i className="fas fa-save"></i> Save
+              </button>
+              <button className="button-cancel" onClick={handleCancelNewArticle}>
+                <i className="fas fa-times"></i> Cancel
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
